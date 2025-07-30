@@ -1,10 +1,9 @@
-
 streamlit
-tensorflow
-opencv-python
+tensorflow==2.11.0
+opencv-python-headless
 numpy
 pandas
-Pillow==9.5.0
+Pillow
 matplotlib
 pytesseract
 scikit-image
@@ -13,6 +12,6 @@ python-docx
 PyMuPDF
 python-magic-bin; sys_platform == "win32"
 python-magic; sys_platform != "win32"
-easyocr
-h5py
 stegano==0.9.5
+h5py
+
