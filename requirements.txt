@@ -1,9 +1,10 @@
+
 streamlit
 tensorflow
 opencv-python
 numpy
 pandas
-Pillow
+Pillow==9.5.0
 matplotlib
 pytesseract
 scikit-image
@@ -15,4 +16,3 @@ python-magic; sys_platform != "win32"
 easyocr
 h5py
 stegano==0.9.5
-python-jose
