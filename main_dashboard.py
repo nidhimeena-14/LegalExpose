@@ -15,7 +15,7 @@ from src.noise import extract_noise_residual
 
 # === CONFIG ===
 PROJECT_NAME = "LegalExpose"
-MODEL_PATH = "../DL/DL MODEL.keras"
+MODEL_PATH = "DL_MODEL.keras"  # ✅ updated for same-level model in Streamlit Cloud
 IMAGE_SIZE = (128, 128)
 NOISE_LOW = 3000
 NOISE_HIGH = 9000
@@ -45,7 +45,7 @@ uploaded_file = st.file_uploader("📤 Upload an Image", type=["png", "jpg", "jp
 if uploaded_file:
     st.image(uploaded_file, caption="📎 Uploaded Document", use_column_width=True)
     image = Image.open(uploaded_file).convert("RGB")
-    file_path = "temp_uploaded.jpg"
+    file_path = os.path.join("output", "temp_uploaded.jpg")
     image.save(file_path)
 
     # === EXIF Metadata ===
@@ -56,7 +56,7 @@ if uploaded_file:
         for key, val in exif_data.items():
             st.write(f"- **{key}**: {val}")
     else:
-        st.info("No EXIF metadata found. This may indicate that the file was edited, downloaded, or scanned — EXIF data is often removed during such actions")
+        st.info("No EXIF metadata found. This may indicate that the file was edited, downloaded, or scanned.")
 
     # === OCR Extraction ===
     st.markdown("---")
@@ -152,7 +152,7 @@ if uploaded_file:
     st.markdown("---")
     st.subheader("📥 Generate PDF Forensic Report")
     if st.button("🧾 Download PDF Report"):
-        output_pdf = "forensic_report.pdf"  # ✅ Define output path
+        output_pdf = os.path.join("output", "forensic_report.pdf")
         try:
             generate_report(
                 ela_result=file_path,
@@ -166,7 +166,7 @@ if uploaded_file:
                 confidence=confidence,
                 noise_heatmap_path=heatmap_path,
                 noise_highlighted_path=highlight_path,
-                output_pdf=output_pdf  # ✅ Pass as required
+                output_pdf=output_pdf
             )
             with open(output_pdf, "rb") as f:
                 st.download_button("📄 Download", f, file_name="forensic_report.pdf")
